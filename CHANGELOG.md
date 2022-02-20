@@ -2,6 +2,82 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 5.18.0 - 2022-02-09
+- Fire plugin event `tabNavigated` when tab navigation is finished. Save `errorText` in `tab.prerender.navigateError`
+- Mark page done if `navigateError` exists
+
+## 5.17.0 - 2021-12-16
+### Changed
+- Allow enabling of request and JS logging to console with the `PRERENDER_LOG_REQUESTS` environment variable
+
+## 5.16.5 - 2021-12-08
+### Changed
+- Fix plugin event logging after reject
+
+## 5.16.4 - 2021-12-06
+### Changed
+- Logging if the plugin event lasts more than 10 seconds
+
+## 5.16.3 - 2021-11-29
+### Changed
+- Save if the rendering was timed out in tab.prerender.timedout
+
+## 5.16.2 - 2021-11-26
+### Changed
+- Add option to skip setting `customElements.forcePolyfill = true`
+
+## 5.16.1 - 2021-10-25
+### Changed
+- Undefined page outerHTML treated as an error
+
+## 5.16.0 - 2021-09-21
+### Changed
+- Save errors to tab.prerender.errors
+
+## 5.15.0 - 2021-08-31
+### Changed
+- Log initial request
+
+## 5.14.0 - 2021-07-26
+### Changed
+- Ignore EventSource requests when counting the number of requests in flight
+
+## 5.13.1 - 2021-06-21
+### Changed
+- Fix wait for connect call
+
+## 5.13.0 - 2021-06-21
+### Changed
+- Retry CDP websocket connection.
+
+## 5.12.0 - 2021-06-04
+### Changed
+- Upgraded `chrome-remote-interface` from `0.28.x` to `0.30.0`.
+
+## 5.11.3 - 2021-06-04
+### Changed
+- We didn't wait some promises like `setUserAgentOverride`, `setBypassServiceWorker` and `setOverrideCertificateErrors` in the past. Under heavy load, we might send requests before these overrides are set properly.
+
+## 5.11.2 - 2021-06-04
+### Added
+- `prerenderReadyDelay` now can be configured via `req.prerender.prerenderReadyDelay`
+
+## 5.11.1 - 2021-06-03
+### Changed
+- fix: `firstPrerenderReadyTime` should be evulated in each rendering process, not only the first rendering
+
+## 5.11.0 - 2021-05-20
+### Changed
+- stop rendering after `prerenderReady` set to true.
+
+## 5.10.0 - 2021-05-06
+### Added
+- modified the `checkIfPageIsDoneLoading` function to stop checking the page status if we received a redirect.
+
+## 5.9.0 - 2021-04-28
+### Added
+- added `timeoutStatusCode` to `tab.prerender` and to `this.options`. We are returning with this status code if a page won't load in `pageLoadTimeout`.
+
 ## 5.8.0 - 2020-07-27
 ### Added
 - added `timeSpentConnectingToBrowser`, `timeSpentOpeningTab`, `timeSpentLoadingUrl`, `timeSpentParsingPage`, `timeUntilError` to `req.prerender` to allow for debugging of certain issues with the server spending too much time in different lifecycle sections
